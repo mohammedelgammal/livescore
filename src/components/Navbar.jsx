@@ -10,7 +10,7 @@ const Navbar = () => {
       <Link to="/betting-tips-today" className="nav-link">
         <HStack>
           <AiOutlineFall />
-          <Text style={{ whiteSpace: "nowrap" }}> Fropping odds</Text>
+          <Text style={{ whiteSpace: "nowrap" }}> Dropping odds</Text>
         </HStack>
       </Link>
       <Link to="/favorites" className="nav-link">

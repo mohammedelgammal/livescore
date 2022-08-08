@@ -1,7 +1,9 @@
 import Header from "./Header";
 import Sportsbar from "../components/sportsBar";
+import Main from "./Main";
 import "../dist/styles/style.css";
 import useMediaQuery from "../customsHooks/mediaQueries";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const xs = useMediaQuery("(max-width: 480px)"),
@@ -15,6 +17,8 @@ const App = () => {
     <>
       <Header />
       <Sportsbar count={count} />
+
+      <Main />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, HStack, Box } from "@chakra-ui/react";
+import { Container, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./../components/Navbar";
 import Searchbar from "./../components/Searchbar";
 import Logo from "./../components/Logo";
@@ -16,7 +16,7 @@ const Header = () => {
           <Logo />
         </GridItem>
         <GridItem area={"search"}>
-          <Searchbar />
+          <Searchbar placeholder="Search" />
         </GridItem>
         <GridItem area={"nav"}>
           <Navbar />

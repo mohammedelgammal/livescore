@@ -13,33 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { sports } from "../data/local";
 
 const Sportsbar = ({ count }) => {
-  const sports = [
-    { title: "Football", url: "football" },
-    { title: "Basketball", url: "basketball" },
-    { title: "Tennis", url: "tennis" },
-    { title: "Table Tennis", url: "table_tennis" },
-    { title: "Hockey", url: "hockey" },
-    { title: "Esports", url: "esports" },
-    { title: "Handball", url: "handball" },
-    { title: "Volleyball", url: "volleyball" },
-    { title: "Baseball", url: "baseball" },
-    { title: "American Football", url: "american_football" },
-    { title: "Motorsport", url: "motorsport" },
-    { title: "Cricket", url: "cricket" },
-    { title: "Rugby", url: "rugby" },
-    { title: "Darts", url: "darts" },
-    { title: "Snooker", url: "snooker" },
-    { title: "Futsal", url: "futsal" },
-    { title: "Badminton", url: "badminton" },
-    { title: "Aussie Rules", url: "aussie_rules" },
-    { title: "Beach Volleyball", url: "beach_volleyball" },
-    { title: "Waterpolo", url: "waterpolo" },
-    { title: "Floorball", url: "floorball" },
-    { title: "Bandy", url: "bandy" },
-  ];
-
   return (
     <Container maxW="1280px" mt="10px" px={0}>
       <Tabs variant={"solid-rounded"}>
@@ -47,7 +23,7 @@ const Sportsbar = ({ count }) => {
           {sports.slice(0, count).map((sport) => (
             <Link
               key={sport.url}
-              to={sport === "football" ? "/" : `/${sport.url}`}
+              to={sport === "Football" ? "/" : `/${sport.url}`}
             >
               <Tab>
                 <Text>{sport.title}</Text>
