@@ -7,7 +7,7 @@ const Calendar = () => {
     <Container p={0}>
       <DatePicker />
       <Center>
-        <Button w={"100%"} variant={"outline"}>
+        <Button mt={1} w={"100%"} variant={"solid"}>
           Today
         </Button>
       </Center>

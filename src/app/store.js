@@ -7,6 +7,8 @@ const store = configureStore({
     [footballApi.reducerPath]: footballApi.reducer,
     football: footballReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(footballApi.middleware),
 });
 
 export default store;

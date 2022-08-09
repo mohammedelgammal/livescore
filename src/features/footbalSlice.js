@@ -6,9 +6,10 @@ const footballSlice = createSlice({
   name: "football",
   initialState,
   reducers: {
-    filterCountries: (state, action) => console.log(state, action.payload),
+    groupByCountry: (state, action) => {
+    },
   },
 });
 
-export const { filterCountries } = footballSlice.actions;
+export const { groupByCountry } = footballSlice.actions;
 export default footballSlice.reducer;

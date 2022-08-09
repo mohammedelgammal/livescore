@@ -1,8 +1,9 @@
-import { Container, Grid, GridItem, VStack } from "@chakra-ui/react";
+import { Container, Grid, GridItem, VStack, Divider } from "@chakra-ui/react";
 import Calendar from "../components/Calendar";
 import TopLeagues from "../components/TopLeagues";
 import Rankings from "./../components/Rankings";
 import AllLeagues from "./../components/AllLeagues";
+import GamesBar from "./gamesBar";
 
 const Main = () => {
   return (
@@ -22,7 +23,10 @@ const Main = () => {
             <AllLeagues />
           </VStack>
         </GridItem>
-        <GridItem area={"center"}>there</GridItem>
+        <Divider />
+        <GridItem area={"center"}>
+          <GamesBar />
+        </GridItem>
         <GridItem area={"right"}>this</GridItem>
       </Grid>
     </Container>
