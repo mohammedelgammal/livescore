@@ -1,34 +1,14 @@
-import {
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-  Input,
-} from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { useDispatch } from "react-redux";
-import { filterCountries } from "../features/footbalSlice";
 
-const Searchbar = ({ position, placeholder }) => {
-  const InputElement =
-    position === "Right" ? InputRightElement : InputLeftElement;
-  const dispatch = useDispatch();
-
+const Searchbar = () => {
   return (
     <InputGroup>
-      <InputElement
+      <InputLeftElement
         pointerEvents="none"
         children={<SearchIcon color="gray.300" />}
       />
-      <Input
-        type="text"
-        placeholder={placeholder}
-        variant="filled"
-        onChange={
-          position === "Right"
-            ? (e) => dispatch(filterCountries(e.target.value))
-            : null
-        }
-      />
+      <Input type="text" placeholder={"Search"} variant="filled" />
     </InputGroup>
   );
 };

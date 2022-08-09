@@ -16,7 +16,7 @@ const Header = () => {
           <Logo />
         </GridItem>
         <GridItem area={"search"}>
-          <Searchbar placeholder="Search" />
+          <Searchbar />
         </GridItem>
         <GridItem area={"nav"}>
           <Navbar />

@@ -13,7 +13,6 @@ import {
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
-import Searchbar from "./Searchbar";
 
 const List = ({ title, data, apiType, isFetching, error, hasFilter }) => {
   const vars =
@@ -21,21 +20,19 @@ const List = ({ title, data, apiType, isFetching, error, hasFilter }) => {
 
   return (
     <Container p={0}>
-      <Center>
-        <Heading as={"h3"} size="sm">
-          {title}
-        </Heading>
-      </Center>
-      {hasFilter && (
-        <Center mt={"20px"}>
-          <Searchbar mt="20px" position={"Right"} placeholder="Filter" />
+      {!hasFilter && (
+        <Center>
+          <Heading as={"h3"} size="sm">
+            {title}
+          </Heading>
         </Center>
       )}
       <Container p={0}>
         <Stack
           divider={<StackDivider borderColor="gray.200" />}
           spacing={2}
-          mt={"25px"}
+          mt={!hasFilter && "25px"}
+          mb={"50px"}
           align="stretch"
           direction={"column"}
         >
