@@ -15,8 +15,6 @@ import {
 import { FiBellOff } from "react-icons/fi";
 import Moment from "moment";
 
-console.log("here", Moment(1660129200).format());
-
 const Match = ({ timestamp, status, home, away, goals }) => {
   const matchTime = Moment(timestamp).format("h:mm");
 

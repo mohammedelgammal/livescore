@@ -6,10 +6,11 @@ const footballSlice = createSlice({
   name: "football",
   initialState,
   reducers: {
-    groupByCountry: (state, action) => {
+    getLiveMatches: (state, action) => {
+      state.isLive = action.payload;
     },
   },
 });
 
-export const { groupByCountry } = footballSlice.actions;
+export const { getLiveMatches } = footballSlice.actions;
 export default footballSlice.reducer;

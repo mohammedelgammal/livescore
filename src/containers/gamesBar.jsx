@@ -14,19 +14,29 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  FormLabel,
 } from "@chakra-ui/react";
 import League from "./League";
 import { useGetGamesQuery } from "../services/sportsApi";
 import Match from "../components/Match";
+import { useDispatch, useSelector } from "react-redux";
+import { getLiveMatches } from "../features/footbalSlice";
 
-const GamesBar = ({ count }) => {
-  const { data, isFetching, error } = useGetGamesQuery("2022-08-09");
+const GamesBar = ({ count, date }) => {
+  const isLive = useSelector((state) => state.football.isLive);
+  const { data, isFetching, error } = useGetGamesQuery(
+    isLive ? "?live=all" : "?date=2022-08-09"
+  );
   const groupedData = data?.response?.reduce((groups, curr) => {
     groups[curr?.league?.name] = groups[curr?.league?.name] || [];
     groups[curr?.league?.name].push(curr);
     return groups;
   }, {});
   const groupedDataKeys = groupedData && Object.values(groupedData);
+  const dispatch = useDispatch();
+  const switchHandler = (e) => {
+    dispatch(getLiveMatches(e.target.checked));
+  };
 
   return (
     <>
@@ -60,15 +70,20 @@ const GamesBar = ({ count }) => {
                     colorScheme={"red"}
                     size="md"
                     mt={0.5}
+                    onChange={(e) => switchHandler(e)}
+                    isDisabled={isFetching}
+                    isChecked={isLive}
                   />
-                  <Tag
-                    borderRadius="full"
-                    colorScheme={"red"}
-                    variant="outline"
-                    px={3}
-                  >
-                    ● live
-                  </Tag>
+                  <FormLabel htmlFor="email-alerts" mb="0">
+                    <Tag
+                      borderRadius="full"
+                      colorScheme={"red"}
+                      variant="outline"
+                      px={3}
+                    >
+                      ● live
+                    </Tag>
+                  </FormLabel>
                 </Stack>
               </Box>
               <Spacer />
@@ -90,17 +105,15 @@ const GamesBar = ({ count }) => {
           <Divider mt={3} orientation="horizontal" />
           <GridItem>
             {groupedDataKeys?.map((league) => (
-              <Stack direction={"column"}>
+              <Stack direction={"column"} key={league[0]?.league?.name}>
                 <League
-                  key={league[0]?.league?.id}
                   src={league[0]?.league?.flag}
                   country={league[0]?.league?.country}
                   league={league[0]?.league?.name}
                 />
                 {league.map((match) => (
-                  <>
+                  <Stack direction={"column"} key={match?.fixture?.id}>
                     <Match
-                      key={match?.fixture?.id}
                       timestamp={match?.fixture?.timestamp}
                       status={match?.fixture?.status?.short}
                       home={match?.teams?.home}
@@ -108,7 +121,7 @@ const GamesBar = ({ count }) => {
                       goals={match?.goals}
                     />
                     <Divider />
-                  </>
+                  </Stack>
                 ))}
               </Stack>
             ))}

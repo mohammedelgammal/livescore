@@ -17,8 +17,8 @@ export const footballApi = createApi({
       }),
     }),
     getGames: builder.query({
-      query: (date) => ({
-        url: `/fixtures?date=${date}`,
+      query: (url) => ({
+        url: `/fixtures${url}`,
         headers: headers,
       }),
     }),
