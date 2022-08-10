@@ -1,11 +1,10 @@
 import { Stack, Avatar, Center, Text, Divider } from "@chakra-ui/react";
-import Match from "../components/Match";
 
-const League = ({ src, league, country, data }) => {
+const League = ({ src, league, country }) => {
   return (
     <>
-      <Stack>
-        <Stack direction={"row"} my={2}>
+      <Stack spacing={4}>
+        <Stack direction={"row"} mt={4}>
           <Center>
             <Avatar
               w={"30px"}
@@ -24,9 +23,7 @@ const League = ({ src, league, country, data }) => {
             </Text>
           </Stack>
         </Stack>
-        <Divider my={2} orientation="horizontal" />
-        <Match data={data} />
-        <Divider my={2} orientation="horizontal" />
+        <Divider orientation="horizontal" />
       </Stack>
     </>
   );
