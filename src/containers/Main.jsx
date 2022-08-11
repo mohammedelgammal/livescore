@@ -3,6 +3,7 @@ import Calendar from "../components/Calendar";
 import TopLeagues from "../components/TopLeagues";
 import Rankings from "./../components/Rankings";
 import AllLeagues from "./../components/AllLeagues";
+import FeaturedBar from "./FeaturedBar";
 import GamesBar from "./gamesBar";
 
 const Main = () => {
@@ -27,7 +28,9 @@ const Main = () => {
         <GridItem area={"center"}>
           <GamesBar />
         </GridItem>
-        <GridItem area={"right"}>this</GridItem>
+        <GridItem area={"right"}>
+          <FeaturedBar />
+        </GridItem>
       </Grid>
     </Container>
   );
