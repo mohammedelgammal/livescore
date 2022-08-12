@@ -45,8 +45,8 @@ const List = ({ title, data, apiType, isFetching, error, hasFilter }) => {
               <Skeleton height={7}></Skeleton>
             </Stack>
           ) : data ? (
-            data?.map((item) => (
-              <Link key={Math.random()} to="/">
+            data?.map((item, index) => (
+              <Link key={index} to="/">
                 <Stack direction={"row"}>
                   <Avatar
                     w={"20px"}

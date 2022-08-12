@@ -17,7 +17,11 @@ const App = () => {
     <>
       <Header />
       <Sportsbar count={count} />
-      <Main />
+      <Routes>
+        <Route path="/" index element={<Main sport="football" />} />
+        <Route path="/football" element={<Main sport="football" />} />
+        <Route path="/basketball" element={<Main sport="basketball" />} />
+      </Routes>
     </>
   );
 };

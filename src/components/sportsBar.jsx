@@ -41,7 +41,7 @@ const Sportsbar = ({ count }) => {
             />
             <MenuList>
               {sports.slice(count).map((sport) => (
-                <Link key={sport.url} to={`/${sport.url}`}>
+                <Link key={sport.url} to={`${sport.url}`}>
                   <MenuItem>{sport.title}</MenuItem>
                 </Link>
               ))}
