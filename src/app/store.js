@@ -11,6 +11,7 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredPaths: ["football.matchesDate"],
+        ignoredActions: ["football/setMatchesDate"],
       },
     }).concat(footballApi.middleware),
 });

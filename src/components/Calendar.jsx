@@ -7,6 +7,7 @@ import { setMatchesDate } from "../features/footbalSlice";
 const Calendar = () => {
   const dispacth = useDispatch();
   const dateChangeHandler = (newDate) => dispacth(setMatchesDate(newDate));
+  const getToday = () => dispacth(setMatchesDate(new Date()));
 
   return (
     <Container p={0}>
@@ -15,7 +16,7 @@ const Calendar = () => {
         selected={useSelector((state) => state.football.matchesDate)}
       />
       <Center>
-        <Button mt={1} w={"100%"} variant={"solid"}>
+        <Button mt={1} w={"100%"} variant={"solid"} onClick={getToday}>
           Today
         </Button>
       </Center>
