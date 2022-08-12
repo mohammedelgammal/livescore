@@ -77,6 +77,7 @@ const TopPlayers = () => {
             <AlertDescription>Check your internet connection.</AlertDescription>
           </Alert>
         ) : null}
+        <Divider />
       </Stack>
     </Container>
   );
