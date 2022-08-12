@@ -8,7 +8,11 @@ const store = configureStore({
     football: footballReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(footballApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredPaths: ["football.matchesDate"],
+      },
+    }).concat(footballApi.middleware),
 });
 
 export default store;

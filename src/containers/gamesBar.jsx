@@ -21,10 +21,13 @@ import Match from "../components/Match";
 import { useDispatch, useSelector } from "react-redux";
 import { getLiveMatches } from "../features/footbalSlice";
 
-const GamesBar = ({ date }) => {
+const GamesBar = () => {
+  const date = useSelector(
+    (state) => state.football.matchesDate.toISOString().split("T")[0]
+  );
   const isLive = useSelector((state) => state.football.isLive);
   const { data, isFetching, error } = useGetGamesQuery(
-    isLive ? "?live=all" : "?date=2022-08-09"
+    isLive ? "?live=all" : `?date=${date}`
   );
   const groupedData = data?.response?.reduce((groups, curr) => {
     groups[curr?.league?.name] = groups[curr?.league?.name] || [];

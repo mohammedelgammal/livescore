@@ -23,7 +23,6 @@ import _ from "lodash";
 const FeaturedMatch = () => {
   const {
     data: liveMatches,
-    isSuccess,
     isFetching,
     error,
   } = useGetGamesQuery("?live=all");
