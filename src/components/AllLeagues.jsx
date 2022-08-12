@@ -1,5 +1,5 @@
 import List from "../components/List";
-import { useGetCountriesQuery } from "../services/sportsApi";
+import { useGetCountriesQuery } from "../services/footballApi";
 import {
   InputGroup,
   InputRightElement,

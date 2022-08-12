@@ -14,15 +14,14 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  FormLabel,
 } from "@chakra-ui/react";
 import League from "./League";
-import { useGetGamesQuery } from "../services/sportsApi";
+import { useGetGamesQuery } from "../services/footballApi";
 import Match from "../components/Match";
 import { useDispatch, useSelector } from "react-redux";
 import { getLiveMatches } from "../features/footbalSlice";
 
-const GamesBar = ({ count, date }) => {
+const GamesBar = ({ date }) => {
   const isLive = useSelector((state) => state.football.isLive);
   const { data, isFetching, error } = useGetGamesQuery(
     isLive ? "?live=all" : "?date=2022-08-09"
@@ -74,16 +73,25 @@ const GamesBar = ({ count, date }) => {
                     isDisabled={isFetching}
                     isChecked={isLive}
                   />
-                  <FormLabel htmlFor="email-alerts" mb="0">
+                  {isLive ? (
                     <Tag
                       borderRadius="full"
                       colorScheme={"red"}
                       variant="outline"
                       px={3}
                     >
-                      ● live
+                      ● live ({data?.response.length})
                     </Tag>
-                  </FormLabel>
+                  ) : (
+                    <Tag
+                      borderRadius="full"
+                      colorScheme={"blue"}
+                      variant="outline"
+                      px={3}
+                    >
+                      All ({data?.response.length})
+                    </Tag>
+                  )}
                 </Stack>
               </Box>
               <Spacer />
@@ -114,7 +122,7 @@ const GamesBar = ({ count, date }) => {
                 {league.map((match) => (
                   <Stack direction={"column"} key={match?.fixture?.id}>
                     <Match
-                      timestamp={match?.fixture?.timestamp}
+                      timestamp={match?.fixture?.status?.elapsed}
                       status={match?.fixture?.status?.short}
                       home={match?.teams?.home}
                       away={match?.teams?.away}

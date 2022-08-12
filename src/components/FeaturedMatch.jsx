@@ -8,8 +8,6 @@ import {
   Text,
   Center,
   Flex,
-  Spacer,
-  Divider,
   Box,
   SkeletonCircle,
   SkeletonText,
@@ -17,15 +15,27 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Divider,
 } from "@chakra-ui/react";
+import { useGetGamesQuery } from "../services/footballApi";
+import _ from "lodash";
 
-const FeaturedMatch = ({ match, isFetching, error }) => {
+const FeaturedMatch = () => {
+  const {
+    data: liveMatches,
+    isSuccess,
+    isFetching,
+    error,
+  } = useGetGamesQuery("?live=all");
+  const matches = liveMatches?.response;
+  const getFeaturedMatch = (length) => matches?.[_.random(0, length)];
+  const featuredMatch = getFeaturedMatch(matches?.length);
+
   return (
-    <Container p={0} pb={20}>
+    <Container p={0}>
       <Heading as="h3" size="l" mb={5}>
         FEATURED MATCH
       </Heading>
-
       {isFetching ? (
         <Box mt={4}>
           <SkeletonCircle size="10" />
@@ -37,12 +47,12 @@ const FeaturedMatch = ({ match, isFetching, error }) => {
           <AlertTitle>Error fetching data!</AlertTitle>
           <AlertDescription>Check your internet connection.</AlertDescription>
         </Alert>
-      ) : match ? (
+      ) : featuredMatch ? (
         <Grid
           templateAreas={`"home date away"
-                        "info info info"`}
+                        "info info info"
+                        "odds odds odds"`}
           templateColumns={"repeat(3, 1fr)"}
-          templateRows={"repeat(2, 1fr)"}
         >
           <GridItem area={"home"}>
             <Flex w={"100%"} justifyContent={"start"}>
@@ -51,13 +61,15 @@ const FeaturedMatch = ({ match, isFetching, error }) => {
                   <Avatar
                     w={"50px"}
                     h={"50px"}
-                    name={match?.teams?.home?.name}
-                    src={match?.teams?.home?.logo}
+                    name={featuredMatch?.teams?.home?.name}
+                    src={featuredMatch?.teams?.home?.logo}
                     bg="transparent"
                   />
                 </Center>
                 <Center>
-                  <Text fontWeight={"bold"}>{match?.teams?.home?.name}</Text>
+                  <Text fontWeight={"bold"} textAlign={"center"}>
+                    {featuredMatch?.teams?.home?.name}
+                  </Text>
                 </Center>
               </Stack>
             </Flex>
@@ -67,8 +79,8 @@ const FeaturedMatch = ({ match, isFetching, error }) => {
               <Stack direction={"column"} fontWeight="bold">
                 <Center>
                   <Text>
-                    {match?.fixture?.status?.elapsed}m -
-                    {match?.fixture?.status?.short}
+                    {featuredMatch?.fixture?.status?.elapsed}m -
+                    {featuredMatch?.fixture?.status?.short}
                   </Text>
                 </Center>
                 <Center>
@@ -84,34 +96,35 @@ const FeaturedMatch = ({ match, isFetching, error }) => {
                   <Avatar
                     w={"50px"}
                     h={"50px"}
-                    name={match?.teams?.away?.name}
-                    src={match?.teams?.away?.logo}
+                    name={featuredMatch?.teams?.away?.name}
+                    src={featuredMatch?.teams?.away?.logo}
                     bg="transparent"
                   />
                 </Center>
                 <Center>
-                  <Text fontWeight={"bold"}>{match?.teams?.away?.name}</Text>
+                  <Text fontWeight={"bold"} textAlign="center">
+                    {featuredMatch?.teams?.away?.name}
+                  </Text>
                 </Center>
               </Stack>
             </Flex>
           </GridItem>
           <GridItem area={"info"}>
-            <Stack fontWeight={"bold"} direction={"column"}>
-              <Flex justifyContent={"space-between"} fontSize={40}>
-                <Flex justifyContent={"center"}>
-                  <Text p={0}>{match?.goals?.home}</Text>
-                </Flex>
-                <Flex justifyContent={"center"} mx={6}>
-                  <Text p={0}>-</Text>
-                </Flex>
-                <Flex justifyContent={"center"}>
-                  <Text p={0}>{match?.goals?.away}</Text>
-                </Flex>
+            <Flex justifyContent={"center"} w={"100%"} fontSize={40}>
+              <Flex justifyContent={"center"}>
+                <Text p={0}>{featuredMatch?.goals?.home}</Text>
               </Flex>
-            </Stack>
+              <Flex justifyContent={"center"} mx={6}>
+                <Text p={0}>-</Text>
+              </Flex>
+              <Flex justifyContent={"center"}>
+                <Text p={0}>{featuredMatch?.goals?.away}</Text>
+              </Flex>
+            </Flex>
           </GridItem>
         </Grid>
       ) : null}
+      <Divider my={4} />
     </Container>
   );
 };

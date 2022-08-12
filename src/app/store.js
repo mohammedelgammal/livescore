@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { footballApi } from "../services/sportsApi";
+import { footballApi } from "../services/footballApi";
 import footballReducer from "../features/footbalSlice";
 
 const store = configureStore({

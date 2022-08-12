@@ -7,7 +7,7 @@ const headers = {
 };
 
 export const footballApi = createApi({
-  reducerPath: "sportsApi",
+  reducerPath: "footballApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getCountries: builder.query({
@@ -22,7 +22,14 @@ export const footballApi = createApi({
         headers: headers,
       }),
     }),
+    getTopPlayers: builder.query({
+      query: (url) => ({
+        url: `/players/topscorers?league=39&season=2022`,
+        headers: headers,
+      }),
+    }),
   }),
 });
 
-export const { useGetCountriesQuery, useGetGamesQuery } = footballApi;
+export const { useGetCountriesQuery, useGetGamesQuery, useGetTopPlayersQuery } =
+  footballApi;

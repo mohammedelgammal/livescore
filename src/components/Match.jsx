@@ -13,11 +13,8 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { FiBellOff } from "react-icons/fi";
-import Moment from "moment";
 
 const Match = ({ timestamp, status, home, away, goals }) => {
-  const matchTime = Moment(timestamp).format("h:mm");
-
   return (
     <Grid
       templateAreas={`"time teams bell"`}
@@ -27,7 +24,7 @@ const Match = ({ timestamp, status, home, away, goals }) => {
       <GridItem pl="2" borderRight={"1px"} borderColor="gray.200" area={"time"}>
         <Center height={"100%"}>
           <List spacing={1}>
-            <ListItem color={"gray"}>{matchTime}</ListItem>
+            <ListItem color={"gray"}>{timestamp}</ListItem>
             <ListItem color={"gray"}>{status}</ListItem>
           </List>
         </Center>
