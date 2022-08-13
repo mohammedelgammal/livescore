@@ -21,10 +21,14 @@ const App = () => {
       <Header />
       <Sportsbar count={count} />
       <Routes>
-        <Route path="/" index element={<Main sport="football" />} />
+        <Route path="/" index element={<Main />} />
         <Route path="/football" element={<Main sport="football" />} />
         {sports.slice(1).map((sport) => (
-          <Route path={sport.url} element={<Soon sport={sport.title} />} />
+          <Route
+            key={sport.title}
+            path={sport.url}
+            element={<Soon sport={sport.title} />}
+          />
         ))}
         <Route path="*" element={<NotFound />} />
       </Routes>
