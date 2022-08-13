@@ -6,6 +6,7 @@ import useMediaQuery from "../customsHooks/mediaQueries";
 import { Routes, Route } from "react-router-dom";
 import Soon from "../components/Soon";
 import { sports } from "../data/local";
+import NotFound from "../components/NotFound";
 
 const App = () => {
   const xs = useMediaQuery("(max-width: 480px)"),
@@ -25,6 +26,7 @@ const App = () => {
         {sports.slice(1).map((sport) => (
           <Route path={sport.url} element={<Soon sport={sport.title} />} />
         ))}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
