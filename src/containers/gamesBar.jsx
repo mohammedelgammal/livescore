@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLiveMatches } from "../features/footbalSlice";
 
 const GamesBar = () => {
+  console.log(useSelector((state) => state.football.sportUrl));
   const date = useSelector(
     (state) => state.football.matchesDate.toISOString().split("T")[0]
   );

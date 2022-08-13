@@ -5,8 +5,17 @@ import Rankings from "./../components/Rankings";
 import AllLeagues from "./../components/AllLeagues";
 import FeaturedBar from "./FeaturedBar";
 import GamesBar from "./gamesBar";
+import { useDispatch } from "react-redux";
+import { setSportUrl } from "../features/footbalSlice";
+import { useEffect } from "react";
 
-const Main = () => {
+const Main = ({ sport }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSportUrl(sport));
+  }, [dispatch, sport]);
+
   return (
     <Container mt={"10px"} p={0} className="main-container" maxW="1280px">
       <Grid

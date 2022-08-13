@@ -18,7 +18,7 @@ import { sports } from "../data/local";
 const Sportsbar = ({ count }) => {
   return (
     <Container maxW="1280px" mt="10px" px={0}>
-      <Tabs variant={"solid-rounded"}>
+      <Tabs variant={"solid-rounded"} isFitted>
         <TabList>
           {sports.slice(0, count).map((sport) => (
             <Link

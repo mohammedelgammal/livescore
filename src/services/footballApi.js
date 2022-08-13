@@ -1,31 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = "https://v3.football.api-sports.io";
-const headers = {
-  "x-rapidapi-host": "v3.football.api-sports.io",
-  "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+const dynamicBaseQuery = async (args, webApi, extraOptions) => {
+  const sportUrl = webApi.getState().football.sportUrl;
+  const baseUrl = `https://${sportUrl}.api-sports.iosss`;
+  const rawBaseQuery = fetchBaseQuery({
+    baseUrl,
+    prepareHeaders: (headers) => {
+      headers.set("x-rapidapi-host", `${sportUrl}.api-sports.iosss`);
+      headers.set("x-rapidapi-key", process.env.REACT_APP_FOOTBALL_API_KEY);
+      return headers;
+    },
+  });
+  return rawBaseQuery(args, webApi, extraOptions);
 };
 
 export const footballApi = createApi({
   reducerPath: "footballApi",
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
     getCountries: builder.query({
       query: () => ({
         url: "/countries",
-        headers: headers,
       }),
     }),
     getGames: builder.query({
       query: (url) => ({
         url: `/fixtures${url}`,
-        headers: headers,
       }),
     }),
     getTopPlayers: builder.query({
-      query: (url) => ({
-        url: `/players/topscorers?league=39&season=2022`,
-        headers: headers,
+      query: () => ({
+        url: "/players/topscorers?league=39&season=2022",
       }),
     }),
   }),

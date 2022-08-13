@@ -15,8 +15,12 @@ const footballSlice = createSlice({
     setMatchesDate: (state, action) => {
       state.matchesDate = action.payload;
     },
+    setSportUrl: (state, action) => {
+      state.sportUrl = action.payload;
+    },
   },
 });
 
-export const { getLiveMatches, setMatchesDate } = footballSlice.actions;
+export const { getLiveMatches, setMatchesDate, setSportUrl } =
+  footballSlice.actions;
 export default footballSlice.reducer;

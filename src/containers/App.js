@@ -4,6 +4,8 @@ import Main from "./Main";
 import "../dist/styles/style.css";
 import useMediaQuery from "../customsHooks/mediaQueries";
 import { Routes, Route } from "react-router-dom";
+import Soon from "../components/Soon";
+import { sports } from "../data/local";
 
 const App = () => {
   const xs = useMediaQuery("(max-width: 480px)"),
@@ -20,7 +22,9 @@ const App = () => {
       <Routes>
         <Route path="/" index element={<Main sport="football" />} />
         <Route path="/football" element={<Main sport="football" />} />
-        <Route path="/basketball" element={<Main sport="basketball" />} />
+        {sports.slice(1).map((sport) => (
+          <Route path={sport.url} element={<Soon sport={sport.title} />} />
+        ))}
       </Routes>
     </>
   );
