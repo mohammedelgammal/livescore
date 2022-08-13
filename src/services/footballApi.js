@@ -20,7 +20,8 @@ export const footballApi = createApi({
       query: (url) => composeRequest(`/fixtures${url}`),
     }),
     getTopPlayers: builder.query({
-      query: () => composeRequest("/players/topscorers?league=39&season=2022"),
+      query: (url) =>
+        composeRequest("/players/topscorers?league=39&season=2022"),
     }),
   }),
 });
