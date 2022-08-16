@@ -26,7 +26,7 @@ const NotFound = () => {
               404
             </Heading>
             <Heading as="h2" size="2xl">
-              404
+              NOT FOUND
             </Heading>
             <Text fontSize={15} color={"gray.400"}>
               Sorry! we cannot find that page! Don't worry though, everything is

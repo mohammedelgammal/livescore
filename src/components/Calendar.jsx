@@ -10,7 +10,7 @@ const Calendar = () => {
   const getToday = () => dispacth(setMatchesDate(new Date()));
 
   return (
-    <Container p={0}>
+    <Container p={0} data-testid="testter">
       <DatePicker
         onChange={dateChangeHandler}
         selected={useSelector((state) => state.football.matchesDate)}

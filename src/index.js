@@ -10,12 +10,12 @@ import store from "./app/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <BrowserRouter basename="/">
+    <BrowserRouter baseName="/">
+      <ChakraProvider>
         <Provider store={store}>
           <App />
         </Provider>
-      </BrowserRouter>
-    </ChakraProvider>
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
