@@ -1,22 +1,39 @@
-import { Container, Button, Center } from "@chakra-ui/react";
-import DatePicker from "sassy-datepicker";
-import "react-dater/dist/index.css";
-import { useDispatch, useSelector } from "react-redux";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Container, Center, Button } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 import { setMatchesDate } from "../features/footbalSlice";
 
 const Calendar = () => {
-  const dispacth = useDispatch();
-  const dateChangeHandler = (newDate) => dispacth(setMatchesDate(newDate));
-  const getToday = () => dispacth(setMatchesDate(new Date()));
+  const minDate = new Date("2010-01-01T00:00:00");
+  const maxDate = new Date("2023-06-01T00:00:00");
+  const dispatch = useDispatch();
+  const changeDateHandler = (date) => {
+    dispatch(setMatchesDate(date));
+  };
+  const setDateToToday = () => dispatch(setMatchesDate(new Date()));
 
   return (
-    <Container p={0} data-testid="testter">
+    <Container p={0}>
       <DatePicker
-        onChange={dateChangeHandler}
         selected={useSelector((state) => state.football.matchesDate)}
+        onChange={(date) => changeDateHandler(date)}
+        inline
+        minDate={minDate}
+        maxDate={maxDate}
       />
       <Center>
-        <Button mt={1} w={"100%"} variant={"solid"} onClick={getToday}>
+        <Button
+          disabled={
+            useSelector((state) => state.football.matchesDate)
+              .toISOString()
+              .split("T")[0] === new Date().toISOString().split("T")[0]
+          }
+          mt={1}
+          w={"100%"}
+          variant={"solid"}
+          onClick={setDateToToday}
+        >
           Today
         </Button>
       </Center>

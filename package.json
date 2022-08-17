@@ -15,6 +15,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-calendar": "^3.7.0",
+    "react-datepicker": "^4.8.0",
     "react-dater": "^1.6.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
