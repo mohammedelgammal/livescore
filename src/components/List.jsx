@@ -19,7 +19,7 @@ const List = ({ title, data, apiType, isFetching, error, hasFilter }) => {
     apiType === "rapid" ? ["title", "url", "icon"] : ["name", "code", "flag"];
 
   return (
-    <Container p={0}>
+    <Container p={0} w={"100%"}>
       {!hasFilter && (
         <Center>
           <Heading as={"h3"} size="sm">
@@ -46,7 +46,7 @@ const List = ({ title, data, apiType, isFetching, error, hasFilter }) => {
             </Stack>
           ) : data ? (
             data?.map((item, index) => (
-              <Link key={index} to="/">
+              <Link key={index} to="/" data-testid={title}>
                 <Stack direction={"row"}>
                   <Avatar
                     w={"20px"}

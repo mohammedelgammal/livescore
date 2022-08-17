@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = "https://v3.football.api-sports.ios";
+const baseUrl = "https://v3.football.api-sports.io";
 const composeRequest = (url) => ({
   url,
   headers: {
-    "x-rapidapi-host": "v3.football.api-sports.ios",
+    "x-rapidapi-host": "v3.football.api-sports.io",
     "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
   },
 });

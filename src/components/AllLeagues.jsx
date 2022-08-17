@@ -5,25 +5,30 @@ import {
   InputRightElement,
   Input,
   Heading,
+  Stack,
+  Container,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilteredLeagues } from "../features/footbalSlice";
+import { useEffect } from "react";
 
 const AllLeagues = () => {
   const { data: leagues, isFetching, error } = useGetCountriesQuery();
-  const [filterTerm, setFilterTerm] = useState("");
-  const [countries, setCountries] = useState(leagues?.response);
-
-  useEffect(() => {
-    const filteredCountries = leagues?.response?.filter((league) =>
+  const dispatch = useDispatch();
+  const filterCountries = (filterTerm) => {
+    const filteredLeagues = leagues?.response?.filter((league) =>
       league.name.toString().toLowerCase().includes(filterTerm.toLowerCase())
     );
-    setCountries(filteredCountries);
-  }, [leagues, filterTerm]);
+    dispatch(setFilteredLeagues(filteredLeagues));
+  };
+  useEffect(() => {
+    dispatch(setFilteredLeagues(leagues?.response));
+  }, [dispatch, leagues?.response]);
 
   return (
-    <>
-      <Heading as={"h3"} size="sm">
+    <Stack direction={"column"} spacing={7}>
+      <Heading as={"h3"} textAlign="center" size="sm">
         ALL LEAGUES
       </Heading>
       <InputGroup>
@@ -35,17 +40,24 @@ const AllLeagues = () => {
           type="text"
           placeholder={"Filter"}
           variant="filled"
-          onChange={(e) => setFilterTerm(e.target.value)}
+          onChange={(e) => filterCountries(e.target.value)}
+          disabled={
+            useSelector((state) => state.football.filteredCountries)
+              ? false
+              : true
+          }
         />
       </InputGroup>
-      <List
-        data={countries}
-        apiType="sports"
-        isFetching={isFetching}
-        error={error}
-        hasFilter
-      />
-    </>
+      <Container p={0}>
+        <List
+          data={useSelector((state) => state.football.filteredCountries)}
+          apiType="sports"
+          isFetching={isFetching}
+          error={error}
+          hasFilter
+        />
+      </Container>
+    </Stack>
   );
 };
 

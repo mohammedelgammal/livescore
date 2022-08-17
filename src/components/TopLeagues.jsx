@@ -1,8 +1,12 @@
 import List from "../components/List";
 import { topLeagues } from "../data/local";
 
-const Rankings = () => {
-  return <List title="TOP LEAGUES" data={topLeagues} apiType="rapid" />;
+const TopLeagues = () => {
+  return (
+    <div title="top-leagues">
+      <List title="TOP LEAGUES" data={topLeagues} apiType="rapid" />
+    </div>
+  );
 };
 
-export default Rankings;
+export default TopLeagues;

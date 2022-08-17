@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLive: false,
   matchesDate: new Date(),
+  sportsUrl: "",
+  filteredLeagues: [],
+  filterErrMsg: "",
 };
 
 const footballSlice = createSlice({
@@ -18,9 +21,20 @@ const footballSlice = createSlice({
     setSportUrl: (state, action) => {
       state.sportUrl = action.payload;
     },
+    setFilteredLeagues: (state, action) => {
+      state.filteredCountries = action.payload;
+    },
+    setFilterErrMsg: (state, action) => {
+      state.filterErrMsg = action.payload;
+    },
   },
 });
 
-export const { getLiveMatches, setMatchesDate, setSportUrl } =
-  footballSlice.actions;
+export const {
+  getLiveMatches,
+  setMatchesDate,
+  setSportUrl,
+  setFilteredLeagues,
+  setFilterErrMsg,
+} = footballSlice.actions;
 export default footballSlice.reducer;
